@@ -1,4 +1,6 @@
 import { Exclude, Expose } from 'class-transformer';
+import { Validate } from 'class-validator';
+import { Unique } from 'src/unique';
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()

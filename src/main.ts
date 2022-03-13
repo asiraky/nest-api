@@ -1,5 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -12,6 +13,10 @@ async function bootstrap() {
       errorHttpStatusCode: 422,
     }),
   );
+
+  // tell class-validator to use nestjs's container
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+
   await app.listen(3000);
 }
 bootstrap();

@@ -6,15 +6,15 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { nanoid } from 'nanoid';
-import bcrypt from 'bcrypt';
+import { hash, compare } from 'bcrypt';
 import { promisify } from 'util';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
-const hashAsync = promisify(bcrypt.hash);
-const compareAsync = promisify(bcrypt.compare);
+const hashAsync = promisify(hash);
+const compareAsync = promisify(compare);
 
 @Injectable()
 export class UsersService {

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { Unique } from './unique';
 
 @Module({
   imports: [
@@ -16,5 +17,6 @@ import { UsersModule } from './users/users.module';
     }),
     UsersModule,
   ],
+  providers: [Unique],
 })
 export class AppModule {}

@@ -1,19 +1,19 @@
-import { IsEmail, IsNotEmpty, Validate } from 'class-validator';
-import { Unique } from 'src/unique';
-import { User } from '../entities/user.entity';
+import { IsEmail, IsNotEmpty, Validate } from 'class-validator'
+import { Unique } from 'src/unique'
+import { User } from '../entities/user.entity'
 
 export class CreateUserDto {
-  @IsEmail()
-  @IsNotEmpty()
-  @Validate(Unique, [User])
-  email: string;
+    @IsEmail()
+    @IsNotEmpty()
+    @Validate(Unique, [User])
+    email: string
 
-  @IsNotEmpty()
-  first_name: string;
+    @IsNotEmpty()
+    first_name: string
 
-  @IsNotEmpty()
-  last_name: string;
+    @IsNotEmpty()
+    last_name: string
 
-  @IsNotEmpty()
-  password: string;
+    @IsNotEmpty()
+    password: string
 }

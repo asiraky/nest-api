@@ -6,15 +6,14 @@ import {
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { nanoid } from 'nanoid'
-import { hash, compare } from 'bcrypt'
+import { hash } from 'bcrypt'
 import { promisify } from 'util'
 
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { User } from './entities/user.entity'
+import { User } from 'src/users/entities/user.entity'
 
 const hashAsync = promisify(hash)
-const compareAsync = promisify(compare)
 
 @Injectable()
 export class UsersService {
@@ -61,13 +60,5 @@ export class UsersService {
         if (result.affected > 1) {
             throw new InternalServerErrorException()
         }
-    }
-
-    async validatePassword(userId: string, password: string) {
-        const user = await this.findOne(userId)
-        if (!user) {
-            throw new NotFoundException()
-        }
-        return compareAsync(password, user.password)
     }
 }

@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, Validate } from 'class-validator'
+
 import { Unique } from 'src/unique'
-import { User } from '../entities/user.entity'
+import { User } from 'src/users/entities/user.entity'
 
 export class CreateUserDto {
     @IsEmail()

@@ -41,6 +41,10 @@ export class UsersService {
         return this.usersRepository.findOne(userId)
     }
 
+    findOneByEmail(email: string) {
+        return this.usersRepository.findOne({ where: { email } })
+    }
+
     async update(userId: string, updateUserDto: UpdateUserDto) {
         const user = await this.usersRepository.findOne(userId)
         if (!user) {

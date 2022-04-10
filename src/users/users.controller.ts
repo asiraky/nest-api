@@ -11,6 +11,8 @@ import {
     NotFoundException,
     Request,
     UnauthorizedException,
+    UseGuards,
+    BadRequestException,
 } from '@nestjs/common'
 
 import { UsersService } from './users.service'
@@ -19,7 +21,9 @@ import { UpdateUserDto } from '../users/dto/update-user.dto'
 import { CaslAbilityFactory } from '../casl/casl-ability.factory'
 import { Action } from '../casl/constants'
 import { User } from './entities/user.entity'
+import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 
+@UseGuards(JwtAuthGuard)
 @Controller('users')
 @UseInterceptors(ClassSerializerInterceptor)
 export class UsersController {
@@ -51,7 +55,7 @@ export class UsersController {
             ability.can(Action.Read, user),
         )
 
-        if (allowedResults.length === 0) {
+        if (results.length > 0 && allowedResults.length === 0) {
             throw new UnauthorizedException(
                 'There are no users available that you have permission to see',
             )
@@ -85,7 +89,15 @@ export class UsersController {
         @Param('id') id: string,
         @Body() updateUserDto: UpdateUserDto,
     ) {
+        if (Object.keys(updateUserDto).length === 0) {
+            throw new BadRequestException('Nothing to update')
+        }
+
         const user = await this.usersService.findOne(id)
+
+        if (!user) {
+            throw new NotFoundException()
+        }
 
         const fieldsToBeUpdated = Object.keys(updateUserDto).filter(
             (k) => k !== undefined,
@@ -103,7 +115,7 @@ export class UsersController {
             }
         }
 
-        return this.usersService.update(id, updateUserDto)
+        this.usersService.update(id, updateUserDto)
     }
 
     @Delete(':id')

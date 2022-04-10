@@ -8,7 +8,13 @@ describe('UsersService', () => {
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [UsersService],
-        }).compile()
+        })
+            .useMocker((token) => {
+                if (token === 'UserRepository') {
+                    return {}
+                }
+            })
+            .compile()
 
         service = module.get<UsersService>(UsersService)
     })

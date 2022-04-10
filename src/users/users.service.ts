@@ -46,14 +46,12 @@ export class UsersService {
     }
 
     async update(userId: string, updateUserDto: UpdateUserDto) {
-        const user = await this.usersRepository.findOne(userId)
-        if (!user) {
-            throw new NotFoundException()
-        }
-        return this.usersRepository.save({
-            ...user,
-            ...updateUserDto,
-        })
+        return this.usersRepository.update(
+            {
+                id: userId,
+            },
+            updateUserDto,
+        )
     }
 
     async remove(userId: string) {

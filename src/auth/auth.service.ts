@@ -26,7 +26,7 @@ export class AuthService {
             throw new NotFoundException()
         }
 
-        if (compareAsync(password, user.password)) {
+        if (await compareAsync(password, user.password)) {
             return user
         }
 

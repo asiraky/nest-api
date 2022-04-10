@@ -11,7 +11,7 @@ import { promisify } from 'util'
 
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { User } from 'src/users/entities/user.entity'
+import { User } from '../users/entities/user.entity'
 
 const hashAsync = promisify(hash)
 

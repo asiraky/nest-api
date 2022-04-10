@@ -42,4 +42,7 @@ export class User {
     @Exclude()
     @Column({ default: true })
     active: boolean
+
+    @Column({ default: false })
+    is_admin: boolean
 }

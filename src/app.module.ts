@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
-import { UsersModule } from 'src/users/users.module'
-import { Unique } from 'src/unique'
-import { AuthModule } from 'src/auth/auth.module'
-import { AuthController } from 'src/auth/auth.controller'
+import { UsersModule } from './users/users.module'
+import { Unique } from './unique'
+import { AuthModule } from './auth/auth.module'
+import { AuthController } from './auth/auth.controller'
+import { CaslModule } from './casl/casl.module'
 
 @Module({
     imports: [
@@ -24,6 +25,7 @@ import { AuthController } from 'src/auth/auth.controller'
         }),
         UsersModule,
         AuthModule,
+        CaslModule,
     ],
     providers: [Unique],
     controllers: [AuthController],

@@ -3,8 +3,8 @@ import { JwtService } from '@nestjs/jwt'
 import { compare } from 'bcrypt'
 import { promisify } from 'util'
 
-import { User } from 'src/users/entities/user.entity'
-import { UsersService } from 'src/users/users.service'
+import { User } from '../users/entities/user.entity'
+import { UsersService } from '../users/users.service'
 
 const compareAsync = promisify(compare)
 

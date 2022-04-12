@@ -7,6 +7,7 @@ import { Unique } from './unique'
 import { AuthModule } from './auth/auth.module'
 import { AuthController } from './auth/auth.controller'
 import { CaslModule } from './casl/casl.module'
+import { ProfileController } from './profile/profile.controller'
 
 @Module({
     imports: [
@@ -28,6 +29,6 @@ import { CaslModule } from './casl/casl.module'
         CaslModule,
     ],
     providers: [Unique],
-    controllers: [AuthController],
+    controllers: [AuthController, ProfileController],
 })
 export class AppModule {}
